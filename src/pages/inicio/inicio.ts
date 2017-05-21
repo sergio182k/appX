@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams} from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import { RegistroPage } from '../registro/registro';
 import { BusquedaPage } from '../busqueda/busqueda';
 import { PedidosRecibidos } from '../pedidos-recibidos/pedidos-recibidos';
-import { AlertController } from 'ionic-angular';
 import { ModalService } from '../../servicios/modal.service';
-import { AuthService } from '../../providers/auth-service'; 
+import { AuthService } from '../../providers/auth-service';
 
 
 @Component({
@@ -14,7 +13,7 @@ import { AuthService } from '../../providers/auth-service';
 })
 
 export class InicioPage {
-	
+
   user:any;
   loginObject:any;
 
@@ -36,7 +35,7 @@ export class InicioPage {
     }
 
     _onLoginSucces(data){
-      this.loginObject = data.results; 
+      this.loginObject = data.results;
       console.log(data);
       window.localStorage.setItem('username', data.persona.email);
       window.localStorage.setItem('tipoUsuario', data.tipoUsuario);
@@ -51,6 +50,6 @@ export class InicioPage {
     next(event){
       this.navCtrl.push(RegistroPage);
     }
-    
+
 
 }
