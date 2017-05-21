@@ -17,19 +17,18 @@ import { ProductoService } from '../providers/producto-service';
 import { CompraService } from '../providers/compra-service';
 import { PedidosAService } from '../providers/pedidosA-service';
 import { PedidosRService } from '../providers/pedidosR-service';
-import { DropdownModule } from 'ng2-dropdown';
+
 import { Accordion, AccordionGroup} from '../pages/accordion';
 import { Maps} from '../maps/maps';
-
 
 @NgModule({
   declarations: [
     MyApp,
     InicioPage,
     RegistroPage,
-    BusquedaPage, 
+    BusquedaPage,
     ListaAfiliados,
-    ListaProductos, 
+    ListaProductos,
     Accordion,
     AccordionGroup,
     Subcategories,
@@ -57,6 +56,7 @@ import { Maps} from '../maps/maps';
     PedidosRecibidos,
     Maps
   ],
-  providers: [AuthService, RegisterService, AfiliadoService, ProductoService, CompraService, PedidosAService, PedidosRService]
+  providers: [AuthService, RegisterService, AfiliadoService, ProductoService, CompraService, PedidosAService,
+    PedidosRService]
 })
 export class AppModule {}
