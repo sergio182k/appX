@@ -22,18 +22,19 @@
     <div>
     <ion-item *ngFor="let category of listCategory" id="lista">
 	    <ion-item (click)="buscarProducto(category)" id="prueba"> 
-	      <h4>{{category.nombre}}</h4>
+	      <h4 id="selected2">{{category.nombre}}</h4>
         <span item-right><ion-icon name="arrow-down" id="customIcon"></ion-icon></span>
 	    </ion-item>
       <ion-item [hidden]="!isGroupShown(category)" *ngFor="let producto of productos" id="lista">
         <ion-thumbnail item-left>
 	        <img src="assets/img/productos/{{producto.nombreImagen}}">
 	      </ion-thumbnail>
-	      <h3>{{producto.nombre}}</h3>
+	      <h3 id="selected2">{{producto.nombre}}</h3>
 	      <h3>{{producto.descripcion}}</h3>
 	      <h3>{{producto.descripcionCantidad}}</h3>
 <!--         <h3>{{producto.precio | currency:'USD':true:'1.0-2'}}</h3> 
  -->	      <h3>{{producto.precio}}</h3> 
+
         <div item-right>
           <div>
             <select id="selected2" [(ngModel)]="producto.cantidad">

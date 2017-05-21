@@ -7,7 +7,7 @@
     </ion-list-header>
     <ion-item  *ngFor="let pedido of pedidosRecibidos" >
       <ion-item  (click)="toggle(pedido)" class="titulo" [ngClass]="{'primary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 1, 'secondary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 2, 'danger': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 3}"> 
-        <h3>{{pedido.persona.nombres}} {{pedido.persona.apellidos}} </h3>
+        <h3 id="selected2">{{pedido.persona.nombres}} {{pedido.persona.apellidos}} </h3>
       </ion-item>
       <ion-item [hidden]="!isGroupShown(pedido)">
         <ion-icon name="contact1" item-left large></ion-icon>

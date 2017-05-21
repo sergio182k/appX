@@ -16,7 +16,7 @@
       <ion-item [ngClass]="{
                         'estado-pendiente': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '1',
                         'estado-aceptado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '2', 
-                        'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }"><h3>{{pedido.compra.sede.nombre}}</h3> 
+                        'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }"><h3 id="selected2">{{pedido.compra.sede.nombre}}</h3> 
       </ion-item>
 
       <ion-item [hidden]="!isGroupShown(pedido)">

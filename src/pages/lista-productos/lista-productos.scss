@@ -4,15 +4,21 @@ page-lista-productos {
 
 }
 
-#botonConfirma{
-	
+#botonConfirma{	
 	bottom: 0;
 	left: 0;
-	height: 2.5em;
+	height: 3.5em;
 	position: fixed;
 	width: 100%;
 	z-index: 2;
+}
 
+#botonConfirmaAlto{
+	//height: 4.6rem !important;
+}
+
+#selected2{
+	padding-top: 4px !important;
 }
 
 #bloqueProd{
