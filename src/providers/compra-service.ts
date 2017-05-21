@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+// import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 
@@ -49,7 +49,7 @@ export class CompraService {
     }
 
 
-    compra(infoCompra){
+    compra(infoCompra): any {
     	this.paquete.token = window.localStorage.getItem('token');
  		this.paquete.idSede = localStorage.getItem('idSede');
     	this.paquete.longitud = 0;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+// import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 /*
@@ -18,7 +18,7 @@ export class AfiliadoService {
     this.afiliado = {};
   }
 
-  	buscarAfiliados(afiliado) {
+  	buscarAfiliados(afiliado): any {
   		this.afiliado.idCiudad = afiliado.idCiudad;
   		this.afiliado.parametroBusqueda = afiliado.parametroBusqueda; 
       this.afiliado.latitud = afiliado.latitud;

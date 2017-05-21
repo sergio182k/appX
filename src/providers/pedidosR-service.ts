@@ -16,7 +16,7 @@ export class PedidosRService {
     this.pedidoAceptadoReq = {};
   }
 
-  pedidosA() {
+  pedidosA(): any {
     this.afiliadoPedido.pagina = '1';
     this.afiliadoPedido.token = window.localStorage.getItem('token');
     console.log(this.afiliadoPedido);
@@ -27,7 +27,7 @@ export class PedidosRService {
     return response;
   }
 
-  pedidosAceptados(idCompra, time, valorDomicilio) {
+  pedidosAceptados(idCompra, time, valorDomicilio): any {
     this.pedidoAceptadoReq.token = window.localStorage.getItem('token');
     this.pedidoAceptadoReq.idCompra = idCompra;
     this.pedidoAceptadoReq.tiempoEntrega = time;
@@ -41,7 +41,7 @@ export class PedidosRService {
     return response;
   }
 
-  pedidosCancelados(idCompra, cancelado) {
+  pedidosCancelados(idCompra, cancelado): any {
     this.pedidoCanceladoReq.token = window.localStorage.getItem('token');
     this.pedidoCanceladoReq.idCompra = idCompra;
     this.pedidoCanceladoReq.observacionRechazado = cancelado;

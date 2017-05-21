@@ -10,7 +10,7 @@ export class AuthService {
   constructor(public http: Http) {
   }
 
-  	login(user) {
+  	login(user) : any {
         this.person = {};
         this.person.usuario = user.email;
         this.person.contrasenna = user.password;
@@ -23,7 +23,7 @@ export class AuthService {
         return response;
     }
 
-    logout(user){
+    logout(user): any {
     	this.person = {};
       this.person = user;
       console.log(this.person);

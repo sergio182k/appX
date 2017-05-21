@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+// import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 
@@ -13,7 +13,7 @@ export class PedidosAService {
     	this.usuarioPedido = {};
   	}
 
-    pedidosA(){
+    pedidosA(): any {
     	this.usuarioPedido.pagina = '1';
         this.usuarioPedido.token = window.localStorage.getItem('token');
 		console.log(this.usuarioPedido);

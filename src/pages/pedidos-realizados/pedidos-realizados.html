@@ -15,15 +15,10 @@
     <ion-item (click)="toggle(pedido)" *ngFor="let pedido of pedidosR" >
       <ion-item [ngClass]="{
                         'estado-pendiente': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '1',
-<<<<<<< HEAD
-                        'estado-aceptado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '2', 
-                        'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }"><h3 id="selected2">{{pedido.compra.sede.nombre}}</h3> 
-=======
                         'estado-aceptado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '2',
-                        'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }"><h3>{{pedido.compra.sede.nombre}}</h3>
->>>>>>> 39b650f314b55e7162179b18b66fab63fbd46168
+                        'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }">
+                        <h3 id="selected2">{{pedido.compra.sede.nombre}}</h3>
       </ion-item>
-
       <ion-item [hidden]="!isGroupShown(pedido)">
           <p><b>Info Establecimiento</b></p>
           Teléfono:<b> {{pedido.compra.sede.telefono}}</b><br>

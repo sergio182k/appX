@@ -15,7 +15,7 @@ export class ProductoService {
     this.producto = {};
   }
 
-  	buscarProducto(afiliado) {
+  	buscarProducto(afiliado): any {
        console.log(afiliado, 'nuevo');
       this.producto = afiliado;
       console.log(this.producto);
