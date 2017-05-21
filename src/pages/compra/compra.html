@@ -65,7 +65,9 @@
 <<<<<<< HEAD
 <!--     <h3>Compra: {{total | currency:'USD':true:'1.0-2'}}</h3>
  -->    <h3 id="selected2">Compra: <b>${{total}}</b></h3>
+=======
     <h3>Compra: <b>{{total | currency:'USD':'true':'1.0-0'}}</b></h3>
+>>>>>>> 39b650f314b55e7162179b18b66fab63fbd46168
     <p>
       <button [disabled]="(infoCompra.recogerCompra == '0') && (infoCompra.direccion == null)" ion-button color="danger" block (click)="comprar()"> Comprar </button>
     </p>
