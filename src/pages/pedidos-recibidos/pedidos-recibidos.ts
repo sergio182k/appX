@@ -104,6 +104,7 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
       id: 1,
       led: 'FF0000',
       text: text
+      // TODO add a sound file
       // ,sound: this.platform.is('android') ? 'file://sound.mp3': 'file://beep.caf',
     });
   }
