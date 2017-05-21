@@ -53,6 +53,8 @@ export class Compra{
 
 
     _onCompraSucces(data){
+      this.total = 0;
+      this._compra.borrarCompra();
       this._modal.showAlert('Exito', 'Tu compra se realizo de manera correcta');
       localStorage.setItem('compraActiva', 'false');
       this._pedidoServ.pedidosA().subscribe(

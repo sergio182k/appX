@@ -29,11 +29,9 @@ export class BusquedaPage {
       this.parmBusqueda.idCiudad = "86";
       localStorage.setItem('compraActiva', 'false');
       localStorage.setItem('idSede', 'vacio');
-
   	}
 
     buscarAfiliado(parmBusqueda){
-    	
       this.parmBusqueda = parmBusqueda;
       console.log(this.parmBusqueda);
     	this._afiliado.buscarAfiliados(this.parmBusqueda).subscribe(

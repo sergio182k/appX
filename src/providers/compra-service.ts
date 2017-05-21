@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-// import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 
@@ -20,22 +20,22 @@ export class CompraService {
   	}
 
 	agregar(producto){
-    if (this.productos.length == 0){
-        this.productos.push(producto);
-        this.idProductos.push(producto.idProducto);
-        this.total = (producto.precio * producto.cantidad);
-    }else{
-        for (var i = 0; i < this.productos.length; i++){
-            if (this.productos[i].nombre == producto.nombre && this.productos[i].precio == producto.precio){
-                this.total = (producto.precio * producto.cantidad);
-            }else{
-                this.productos.push(producto);
-                this.idProductos.push(producto.idProducto);
-                this.total += producto.precio;
+        if (this.productos.length == 0){
+            this.productos.push(producto);
+            this.idProductos.push(producto.idProducto);
+            this.total = (producto.precio * producto.cantidad);
+        }else{
+            for (var i = 0; i < this.productos.length; i++){
+                if (this.productos[i].nombre == producto.nombre && this.productos[i].precio == producto.precio){
+                    this.total = (producto.precio * producto.cantidad);
+                }else{
+                    this.productos.push(producto);
+                    this.idProductos.push(producto.idProducto);
+                    this.total += producto.precio;
+                }
+                break;
             }
-            break;
         }
-    }
 	}
 
 
