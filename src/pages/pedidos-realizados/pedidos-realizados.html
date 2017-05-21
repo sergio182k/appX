@@ -1,9 +1,9 @@
 <ion-content padding>
   <ion-list>
     <ion-list-header>
-      Pedidos realizados 
+      Pedidos realizados
     </ion-list-header>
-    
+
     <ion-fab right bottom>
     <button ion-fab color="danger"><ion-icon name="more"></ion-icon></button>
     <ion-fab-list side="left">
@@ -12,11 +12,16 @@
     </ion-fab-list>
     </ion-fab>
 
-    <ion-item (click)="toggle(pedido)" *ngFor="let pedido of pedidosR" > 
+    <ion-item (click)="toggle(pedido)" *ngFor="let pedido of pedidosR" >
       <ion-item [ngClass]="{
                         'estado-pendiente': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '1',
+<<<<<<< HEAD
                         'estado-aceptado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '2', 
                         'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }"><h3 id="selected2">{{pedido.compra.sede.nombre}}</h3> 
+=======
+                        'estado-aceptado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '2',
+                        'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }"><h3>{{pedido.compra.sede.nombre}}</h3>
+>>>>>>> 39b650f314b55e7162179b18b66fab63fbd46168
       </ion-item>
 
       <ion-item [hidden]="!isGroupShown(pedido)">
@@ -24,40 +29,34 @@
           Teléfono:<b> {{pedido.compra.sede.telefono}}</b><br>
           Dirección:<b> {{pedido.compra.sede.direccion}}</b><br>
           <p *ngFor="let producto of pedido.listaProducto">
-            {{producto.cantidad}} {{producto.nombreProducto}} {{producto.descripcionCantidad}} 
+            {{producto.cantidad}} {{producto.nombreProducto}} {{producto.descripcionCantidad}}
           </p>
 
-          <div [hidden]="pedido.compra.recogerCompra == 'S'">           
+          <div [hidden]="pedido.compra.recogerCompra == 'S'">
             <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1' )" >
-<!--               Domicilio: {{pedido.compra.sede.valorDomicilio | currency:'USD':true:'1.0-2'}}<br>
- -->              Domicilio: {{pedido.compra.sede.valorDomicilio}}<br>
-              <!-- Total:   {{pedido.compra.valorCompra + pedido.compra.sede.valorDomicilio | currency:'USD':true:'1.0-2'}} 
- -->              Total:   {{pedido.compra.valorCompra + pedido.compra.sede.valorDomicilio}} 
+              Domicilio: {{pedido.compra.sede.valorDomicilio | currency:'USD':'true':'1.0-0'}}<br>
+              Total:   {{pedido.compra.valorCompra + pedido.compra.sede.valorDomicilio | currency:'USD':'true':'1.0-0'}}
             </div>
 
             <div [hidden]="!(pedido.compra.sede.valorDomicilio == '0' )" >
               Domicilio: Gratis <br>
-<!--               Total:   {{pedido.compra.valorCompra | currency:'USD':true:'1.0-2'}}
- -->              Total:   {{pedido.compra.valorCompra }}
+              Total:   {{pedido.compra.valorCompra | currency:'USD':'true':'1.0-0'}}
             </div>
 
             <div [hidden]="!(pedido.compra.sede.valorDomicilio == '1' )" >
-              <!-- <div [hidden]="pedido.compra.valorDomicilio == '0'">Domicilio: {{pedido.compra.valorDomicilio | currency:'USD':true:'1.0-2'}}<br></div> -->
-              <div [hidden]="pedido.compra.valorDomicilio == '0'">Domicilio: {{pedido.compra.valorDomicilio}}<br></div>
+              <div [hidden]="pedido.compra.valorDomicilio == '0'">Domicilio: {{pedido.compra.valorDomicilio | currency:'USD':'true':'1.0-0'}}<br></div>
               <div [hidden]="pedido.compra.valorDomicilio != '0'">Domicilio: Valor por confirmar<br></div>
-<!--               Total:   {{pedido.compra.valorCompra + pedido.compra.valorDomicilio | currency:'USD':true:'1.0-2'}}
- -->              Total:   {{pedido.compra.valorCompra + pedido.compra.valorDomicilio}}
+              Total:   {{pedido.compra.valorCompra + pedido.compra.valorDomicilio | currency:'USD':'true':'1.0-0'}}
             </div>
           </div>
 
           <div [hidden]="pedido.compra.recogerCompra == 'N'">
-<!--             Total:   {{pedido.compra.valorCompra | currency:'USD':true:'1.0-2'}}
- -->            Total:   {{pedido.compra.valorCompra }}
-          </div>   
+            Total:   {{pedido.compra.valorCompra | currency:'USD':'true':'1.0-0'}}
+          </div>
       </ion-item>
 
-                    
+
     </ion-item>
   </ion-list>
-  
+
 </ion-content>

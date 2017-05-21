@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { CompraService } from '../../providers/compra-service'; 
+import { NavController, ModalController } from 'ionic-angular';
+import { CompraService } from '../../providers/compra-service';
 import { ModalService } from '../../servicios/modal.service';
 import { PedidosRealizados } from '../pedidos-realizados/pedidos-realizados';
-import { PedidosAService } from '../../providers/pedidosA-service'; 
-import { AfiliadoService } from '../../providers/afiliado-service'; 
-import { Maps } from '../../maps/maps'; 
+import { PedidosAService } from '../../providers/pedidosA-service';
+import { AfiliadoService } from '../../providers/afiliado-service';
+import { Maps } from '../../maps/maps';
 import { InicioPage } from '../inicio/inicio';
 import { BusquedaPage } from '../busqueda/busqueda';
-import { AuthService } from '../../providers/auth-service'; 
+import { AuthService } from '../../providers/auth-service';
 
-@Component({ 
+@Component({
   templateUrl: 'compra.html',
   providers: [ModalService]
 })
 
 export class Compra{
-    imageCategory:any;
     nameCategory:any;
     subCategories:any;
     shownGroup:any;
@@ -24,10 +23,9 @@ export class Compra{
     total:any;
     infoCompra:any;
     pedidosR:any;
-    afiliado:any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public _compra: CompraService, 
-      private _modal:ModalService, public _pedidoServ: PedidosAService, private _modalCtrl: ModalController, 
+    constructor(public navCtrl: NavController, public _compra: CompraService,
+      private _modal:ModalService, public _pedidoServ: PedidosAService, private _modalCtrl: ModalController,
       private _afiliado: AfiliadoService, private _service:AuthService) {
       this.total = 0;
       this.productos = _compra.devolverProductos();
@@ -35,13 +33,13 @@ export class Compra{
       this.infoCompra = {};
       this.infoCompra.recogerCompra = false;
       this.infoCompra.direccion = window.localStorage.getItem('direccion');
-      this.infoCompra.desDireccion = window.localStorage.getItem('desDireccion');     
+      this.infoCompra.desDireccion = window.localStorage.getItem('desDireccion');
     }
 
     isGroupShown(subCategory){
         return this.shownGroup === subCategory;
     }
-    
+
     comprar(){
         this._compra.compra(this.infoCompra).subscribe(
         data => this._onCompraSucces(data),
@@ -65,11 +63,11 @@ export class Compra{
       },
       () => console.log('End')
     );
-      
+
     }
 
     _onBusquedaSucces(data){
-        this.pedidosR = data.results; 
+        this.pedidosR = data.results;
         console.log(data);
         this.navCtrl.push(PedidosRealizados, {data : data});
     }
@@ -79,7 +77,7 @@ export class Compra{
         startLat: 211,
         destLat: this._afiliado.retornoLatLong().sede.latitud,
         startLong: 411,
-        destLong: this._afiliado.retornoLatLong().sede.longitud, 
+        destLong: this._afiliado.retornoLatLong().sede.longitud,
       });
       mapsModal.present();
     }
@@ -95,7 +93,7 @@ export class Compra{
     }
 
     logOut(){
-      if(window.localStorage.getItem('token') === "undefined" || window.localStorage.getItem('token') === null){  
+      if(window.localStorage.getItem('token') === "undefined" || window.localStorage.getItem('token') === null){
             console.log('error');
           }else {
             let userSend = window.localStorage.getItem('token');
@@ -107,7 +105,7 @@ export class Compra{
               },
               () => console.log('End')
            );
-          }  
+          }
     }
 
     _onLogoutSucces(){

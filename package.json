@@ -22,11 +22,27 @@
     "@angular/platform-browser": "2.0.0",
     "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/platform-server": "2.0.0",
+    "@ionic-native/background-mode": "^3.10.2",
+    "@ionic-native/core": "^3.10.2",
+    "@ionic-native/local-notifications": "^3.10.2",
     "@ionic/storage": "1.0.3",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.14",
     "@types/google-maps": "^3.2.0",
+    "cordova-android": "^6.1.2",
+    "cordova-plugin-app-event": "^1.2.0",
+    "cordova-plugin-background-mode": "^0.7.2",
+    "cordova-plugin-compat": "^1.1.0",
+    "cordova-plugin-console": "~1.0.4",
+    "cordova-plugin-device": "^1.1.6",
+    "cordova-plugin-geolocation": "^2.4.3",
+    "cordova-plugin-splashscreen": "~4.0.0",
+    "cordova-plugin-statusbar": "^2.2.3",
+    "cordova-plugin-vibration": "^2.1.5",
+    "cordova-plugin-whitelist": "~1.3.0",
+    "de.appplant.cordova.plugin.local-notification": "^0.8.4",
     "ionic-angular": "2.0.0-rc.1",
     "ionic-native": "2.2.3",
+    "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
     "ng2-dropdown": "0.0.15",
     "rxjs": "5.0.0-beta.12",
@@ -52,5 +68,19 @@
       "locator": "ios"
     }
   ],
-  "description": "ClicPedidos: An Ionic project"
+  "description": "ClicPedidos: An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-console": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-vibration": {},
+      "ionic-plugin-keyboard": {},
+      "de.appplant.cordova.plugin.local-notification": {},
+      "cordova-plugin-background-mode": {}
+    }
+  }
 }

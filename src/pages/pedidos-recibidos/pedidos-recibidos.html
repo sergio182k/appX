@@ -1,13 +1,18 @@
 <ion-content padding>
   <ion-list>
     <ion-list-header>
-      Pedidos Recibidos 
+      Pedidos Recibidos
       <ion-badge item-right>{{conteoNuevosPedidos}}</ion-badge>
       <button ion-button item-right (click)="logout($event)">Salir</button>
     </ion-list-header>
     <ion-item  *ngFor="let pedido of pedidosRecibidos" >
+<<<<<<< HEAD
       <ion-item  (click)="toggle(pedido)" class="titulo" [ngClass]="{'primary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 1, 'secondary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 2, 'danger': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 3}"> 
         <h3 id="selected2">{{pedido.persona.nombres}} {{pedido.persona.apellidos}} </h3>
+=======
+      <ion-item  (click)="toggle(pedido)" class="titulo" [ngClass]="{'primary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 1, 'secondary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 2, 'danger': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 3}">
+        <h3>{{pedido.persona.nombres}} {{pedido.persona.apellidos}} </h3>
+>>>>>>> 39b650f314b55e7162179b18b66fab63fbd46168
       </ion-item>
       <ion-item [hidden]="!isGroupShown(pedido)">
         <ion-icon name="contact1" item-left large></ion-icon>
@@ -40,30 +45,26 @@
             <ion-input type="text" [(ngModel)]="cancelado"></ion-input>
           </ion-item>
           <div [hidden]="!(pedido.compra.recogerCompra == 'N')">
-            <div [hidden]="!(pedido.compra.sede.valorDomicilio == '1')"> 
+            <div [hidden]="!(pedido.compra.sede.valorDomicilio == '1')">
               <ion-item>
                 <ion-label floating>Domicilio</ion-label>
                 <ion-input type="number" [(ngModel)]="pedido.compra.valorDomicilio"></ion-input>
               </ion-item>
-              <!-- Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) | currency:'USD':true:'1.0-2'}} -->
-              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) }}
+              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) | currency:'USD':'true':'1.0-0'}}
             </div>
             <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1')">
-<!--               Domicilio: {{pedido.compra.sede.valorDomicilio | currency:'USD':true:'1.0-2'}}
- -->              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1)}}
+              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1) | currency:'USD':'true':'1.0-0'}}
             </div>
             <div [hidden]="!(pedido.compra.sede.valorDomicilio == '0')">
               Domicilio: Gratis
-<!--               Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':true:'1.0-2'}}
- -->              Total: {{(pedido.compra.valorCompra * 1) }}
+              Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':'true':'1.0-0'}}
             </div>
           </div>
           <div [hidden]="!(pedido.compra.recogerCompra == 'S')">
-<!--             Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':true:'1.0-2'}}
- -->            Total: {{(pedido.compra.valorCompra * 1)}}
+            Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':'true':'1.0-0'}}
           </div>
         </div>
       </ul>
     </ion-item>
-  </ion-list>	
+  </ion-list>
 </ion-content>
