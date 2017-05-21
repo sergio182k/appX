@@ -17,7 +17,7 @@
   <ion-list>
     <ion-list-header>
       Confirma tu compra
-      <ion-icon name="locate" item-right (click)="mostrarMapa()"></ion-icon>    
+      <ion-icon name="locate" item-right (click)="mostrarMapa()"></ion-icon>
     </ion-list-header>
     <ion-item>
       <ion-label>Deseas recoger la compra</ion-label>
@@ -41,10 +41,10 @@
       </ion-item>
     </ion-list>
 
-    
+
     <ion-item-group>
       <ul style="list-style:none">
-        <li>  
+        <li>
           <ion-row>
             <ion-col><b>Cantidad</b></ion-col>
           	<ion-col><b>Producto</b></ion-col>
@@ -54,21 +54,19 @@
         <li *ngFor="let producto of productos">
     	     <ion-row>
             <ion-col><ion-icon name="remove-circle" (click)="agregarQuitar(producto, 0)"></ion-icon>  {{producto.cantidad}} <ion-icon name="add-circle" (click)="agregarQuitar(producto, 1)"></ion-icon></ion-col>
-    	    	<ion-col>{{producto.nombre}}</ion-col>
-<!--             <ion-col>{{producto.precio | currency:'USD':true:'1.0-2'}}</ion-col>
- -->    	    	<ion-col>{{producto.precio}} <ion-icon name="close-circle" (click)="quitar(producto)"></ion-icon></ion-col>
+             <ion-col>{{producto.nombre}}</ion-col>
+             <ion-col>{{producto.precio | currency:'USD':'true':'1.0-0'}} <ion-icon name="close-circle" (click)="quitar(producto)"></ion-icon></ion-col>
     	    </ion-row>
-        </li> 
+        </li>
       </ul>
     </ion-item-group>
-	
+
   <ion-item>
-<!--     <h3>Compra: {{total | currency:'USD':true:'1.0-2'}}</h3>
- -->    <h3>Compra: <b>${{total}}</b></h3>
+    <h3>Compra: <b>{{total | currency:'USD':'true':'1.0-0'}}</b></h3>
     <p>
       <button [disabled]="(infoCompra.recogerCompra == '0') && (infoCompra.direccion == null)" ion-button color="danger" block (click)="comprar()"> Comprar </button>
     </p>
   </ion-item>
-    
+
   </ion-list>
 </ion-content>

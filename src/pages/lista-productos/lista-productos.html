@@ -7,7 +7,7 @@
 <ion-content padding id="bloqueProd">
   <ion-list>
    <!--  <ion-list-header>
-      Categorias 
+      Categorias
     </ion-list-header> -->
 
     <ion-fab right bottom>
@@ -21,7 +21,7 @@
 
     <div>
     <ion-item *ngFor="let category of listCategory" id="lista">
-	    <ion-item (click)="buscarProducto(category)" id="prueba"> 
+	    <ion-item (click)="buscarProducto(category)" id="prueba">
 	      <h4>{{category.nombre}}</h4>
         <span item-right><ion-icon name="arrow-down" id="customIcon"></ion-icon></span>
 	    </ion-item>
@@ -32,8 +32,7 @@
 	      <h3>{{producto.nombre}}</h3>
 	      <h3>{{producto.descripcion}}</h3>
 	      <h3>{{producto.descripcionCantidad}}</h3>
-<!--         <h3>{{producto.precio | currency:'USD':true:'1.0-2'}}</h3> 
- -->	      <h3>{{producto.precio}}</h3> 
+        <h3>{{producto.precio | currency:'USD':'true':'1.0-0'}}</h3>
         <div item-right>
           <div>
             <select id="selected2" [(ngModel)]="producto.cantidad">
@@ -55,8 +54,8 @@
       </ion-item>
     </ion-item>
     </div>
-  </ion-list>	
+  </ion-list>
   <div id="botonConfirma" [hidden]="!verBarra">
-    <button ion-button color="danger"  block (click)="confirmaCompra()">Confirmar Compra ${{total}}</button>
-  </div> 
+    <button ion-button color="danger"  block (click)="confirmaCompra()">Confirmar Compra {{total | currency:'USD':'true':'1.0-0'}}</button>
+  </div>
 </ion-content>

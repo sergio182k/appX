@@ -11,10 +11,10 @@
   </ion-fab>
 
 	<ion-list>
-  		<ion-item *ngFor="let afiliado of afiliados" id="bloque"> 
-    		
+  		<ion-item *ngFor="let afiliado of afiliados" id="bloque">
+
         <ion-thumbnail item-left>
-          <div class="marca-estado" [ngClass]="{'estado-abierto': afiliado.abierto, 'estado-cerrado': !afiliado.abierto}">  
+          <div class="marca-estado" [ngClass]="{'estado-abierto': afiliado.abierto, 'estado-cerrado': !afiliado.abierto}">
           </div>
       			<img src="assets/img/afiliados/{{afiliado.sede.logo}}">
     		</ion-thumbnail>
@@ -23,20 +23,18 @@
     		<h3 color="danger">{{afiliado.sede.nombre}}</h3>
 
         <h6>{{afiliado.sede.descripcion}}</h6>
-<!--         <h5> Pedido min: {{afiliado.sede.valorPedidoMin | currency:'USD':true:'1.0-2'}}</h5>              
- -->        <h5> Pedido min: {{afiliado.sede.valorPedidoMin}}</h5>              
+         <h5> Pedido min: {{afiliado.sede.valorPedidoMin | currency:'USD':'true':'1.0-0'}}</h5>
         <!-- <h4>Domicilio: -->
         <!-- <h4><img src="assets/img/motoDom.png" height="20" width="22"> -->
         <h4><ion-icon name="ios-bicycle" font-color="red"></ion-icon>
-          <span *ngIf="afiliado.sede.valorDomicilio == 1"> Varia según tu ubicación </span> 
+          <span *ngIf="afiliado.sede.valorDomicilio == 1"> Varia según tu ubicación </span>
           <span *ngIf="afiliado.sede.valorDomicilio == 0"> Gratis </span>
-<!--           <span *ngIf="afiliado.sede.valorDomicilio > 1"> {{afiliado.sede.valorDomicilio | currency:'USD':true:'1.0-2' }}</span> 
- -->    <span *ngIf="afiliado.sede.valorDomicilio > 1"> {{afiliado.sede.valorDomicilio}}</span> 
-        </h4>  
-        
-        
+        <span *ngIf="afiliado.sede.valorDomicilio > 1"> {{afiliado.sede.valorDomicilio | currency:'USD':'true':'1.0-0'}}</span>
+        </h4>
+
+
           <h5 class="colorClaro"><b> {{afiliado.sede.direccion}} </b></h5>
-      
+
         <h4 [hidden]="!afiliado.sede.novedades">
           {{afiliado.sede.novedades}}
         </h4>
