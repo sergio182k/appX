@@ -20,28 +20,25 @@ export class CompraService {
   	}
 
 	agregar(producto){
-		console.log(producto, 'producto en compra');
-        if (this.productos.length == 0){
-            this.productos.push(producto);
-            this.idProductos.push(producto.idProducto);
-            this.total = (producto.precio * producto.cantidad);
-        }else{
-            for (var i = 0; i < this.productos.length; i++){
-                if (this.productos[i].nombre == producto.nombre && this.productos[i].precio == producto.precio){
-                    this.total = (producto.precio * producto.cantidad);
-                    break;
-                }else{
-                    this.productos.push(producto);
-                    this.idProductos.push(producto.idProducto);
-                    this.total += producto.precio;
-                    break;
-                }
+    if (this.productos.length == 0){
+        this.productos.push(producto);
+        this.idProductos.push(producto.idProducto);
+        this.total = (producto.precio * producto.cantidad);
+    }else{
+        for (var i = 0; i < this.productos.length; i++){
+            if (this.productos[i].nombre == producto.nombre && this.productos[i].precio == producto.precio){
+                this.total = (producto.precio * producto.cantidad);
+            }else{
+                this.productos.push(producto);
+                this.idProductos.push(producto.idProducto);
+                this.total += producto.precio;
             }
+            break;
         }
-		console.log(this.total);
+    }
 	}
 
-    
+
 
 	devolverProductos(){
         return this.productos;
@@ -59,23 +56,23 @@ export class CompraService {
     	this.paquete.latitud = 0;
     	this.paquete.idsProductosComprados = this.idProductos;
     	this.paquete.observacion = infoCompra.observacion == null ? '' : infoCompra.observacion;
-   		this.paquete.recogerCompra = infoCompra.recogerCompra == false ? 'N' : 'S';  
+   		this.paquete.recogerCompra = infoCompra.recogerCompra == false ? 'N' : 'S';
         if(infoCompra.direccion == null){
-           this.paquete.direccion =  '';   
+           this.paquete.direccion =  '';
         }else{
             this.paquete.direccion = infoCompra.direccion;
             window.localStorage.setItem('direccion', infoCompra.direccion);
         }
         if(infoCompra.desDireccion == null){
-           this.paquete.desDireccion =  '';   
+           this.paquete.desDireccion =  '';
         }else{
             this.paquete.direccion = infoCompra.direccion;
             window.localStorage.setItem('desDireccion', infoCompra.desDireccion);
         }
 
 		console.log(this.paquete)
-		var url = 'https://clicpedidos.co:8443/clicpedidos/api/compra/recibirCompra/';
-        var response = this.http.post(url, this.paquete)
+		const url = 'https://clicpedidos.co:8443/clicpedidos/api/compra/recibirCompra/';
+        const response = this.http.post(url, this.paquete)
             .map((res) => {});
         console.log(response, 'nada');
         return response;
@@ -116,10 +113,10 @@ export class CompraService {
             if (this.productos[i].nombre == producto.nombre && this.productos[i].precio == producto.precio){
                 this.productos.splice([i],1);
                 this.total -= (producto.precio * producto.cantidad);
-                break;   
-            }   
+                break;
+            }
         }
     }
-    
+
 
 }
