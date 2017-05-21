@@ -1,0 +1,15 @@
+// #barraBusqueda{
+
+	.item-md.item-block .item-inner {
+	    border-bottom: 0px;
+	}
+
+	.searchbar-md .searchbar-input {
+		box-shadow: none;
+		border: 1px solid lightgray;
+	}
+
+	.searchbar-md .searchbar-input:focus{
+			border: 1px solid blue;
+	}
+//}

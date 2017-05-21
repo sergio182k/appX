@@ -1,0 +1,63 @@
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      Pedidos realizados 
+    </ion-list-header>
+    
+    <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="more"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="logOut()"><ion-icon name="log-out"></ion-icon></button>
+      <button ion-fab (click)="busqueda()"><ion-icon name="ios-search"></ion-icon></button>
+    </ion-fab-list>
+    </ion-fab>
+
+    <ion-item (click)="toggle(pedido)" *ngFor="let pedido of pedidosR" > 
+      <ion-item [ngClass]="{
+                        'estado-pendiente': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '1',
+                        'estado-aceptado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '2', 
+                        'estado-cancelado': pedido.procesosCompraActual.tipoProceso.idTipoProceso == '3' }"><h3>{{pedido.compra.sede.nombre}}</h3> 
+      </ion-item>
+
+      <ion-item [hidden]="!isGroupShown(pedido)">
+          <p><b>Info Establecimiento</b></p>
+          Teléfono:<b> {{pedido.compra.sede.telefono}}</b><br>
+          Dirección:<b> {{pedido.compra.sede.direccion}}</b><br>
+          <p *ngFor="let producto of pedido.listaProducto">
+            {{producto.cantidad}} {{producto.nombreProducto}} {{producto.descripcionCantidad}} 
+          </p>
+
+          <div [hidden]="pedido.compra.recogerCompra == 'S'">           
+            <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1' )" >
+<!--               Domicilio: {{pedido.compra.sede.valorDomicilio | currency:'USD':true:'1.0-2'}}<br>
+ -->              Domicilio: {{pedido.compra.sede.valorDomicilio}}<br>
+              <!-- Total:   {{pedido.compra.valorCompra + pedido.compra.sede.valorDomicilio | currency:'USD':true:'1.0-2'}} 
+ -->              Total:   {{pedido.compra.valorCompra + pedido.compra.sede.valorDomicilio}} 
+            </div>
+
+            <div [hidden]="!(pedido.compra.sede.valorDomicilio == '0' )" >
+              Domicilio: Gratis <br>
+<!--               Total:   {{pedido.compra.valorCompra | currency:'USD':true:'1.0-2'}}
+ -->              Total:   {{pedido.compra.valorCompra }}
+            </div>
+
+            <div [hidden]="!(pedido.compra.sede.valorDomicilio == '1' )" >
+              <!-- <div [hidden]="pedido.compra.valorDomicilio == '0'">Domicilio: {{pedido.compra.valorDomicilio | currency:'USD':true:'1.0-2'}}<br></div> -->
+              <div [hidden]="pedido.compra.valorDomicilio == '0'">Domicilio: {{pedido.compra.valorDomicilio}}<br></div>
+              <div [hidden]="pedido.compra.valorDomicilio != '0'">Domicilio: Valor por confirmar<br></div>
+<!--               Total:   {{pedido.compra.valorCompra + pedido.compra.valorDomicilio | currency:'USD':true:'1.0-2'}}
+ -->              Total:   {{pedido.compra.valorCompra + pedido.compra.valorDomicilio}}
+            </div>
+          </div>
+
+          <div [hidden]="pedido.compra.recogerCompra == 'N'">
+<!--             Total:   {{pedido.compra.valorCompra | currency:'USD':true:'1.0-2'}}
+ -->            Total:   {{pedido.compra.valorCompra }}
+          </div>   
+      </ion-item>
+
+                    
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

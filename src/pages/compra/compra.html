@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar class="bar navBar">
+    <ion-title>Confirmar Compra</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="more"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="logOut()"><ion-icon name="log-out"></ion-icon></button>
+      <button ion-fab (click)="busqueda()"><ion-icon name="ios-search"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-list>
+    <ion-list-header>
+      Confirma tu compra
+      <ion-icon name="locate" item-right (click)="mostrarMapa()"></ion-icon>    
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Deseas recoger la compra</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="infoCompra.recogerCompra"></ion-checkbox>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label><b style="color: black">Direccion</b></ion-label>
+        <ion-input [disabled]="infoCompra.recogerCompra == '1'" type="text" [(ngModel)]="infoCompra.direccion" placeholder="Cra 52 # 48 0">{{infoCompra.direccion}}</ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><b style="color: black">Descripcion direccion</b></ion-label>
+        <ion-input [disabled]="infoCompra.recogerCompra == '1'" type="text" [(ngModel)]="infoCompra.desDireccion" placeholder="Centro">{{infoCompra.desDireccion}}</ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><b style="color: black">Observaciones</b></ion-label>
+        <ion-input type="text" [(ngModel)]="infoCompra.observacion" placeholder="Sin cebolla"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    
+    <ion-item-group>
+      <ul style="list-style:none">
+        <li>  
+          <ion-row>
+            <ion-col><b>Cantidad</b></ion-col>
+          	<ion-col><b>Producto</b></ion-col>
+          	<ion-col><b>Precio</b></ion-col>
+          </ion-row>
+        </li>
+        <li *ngFor="let producto of productos">
+    	     <ion-row>
+            <ion-col><ion-icon name="remove-circle" (click)="agregarQuitar(producto, 0)"></ion-icon>  {{producto.cantidad}} <ion-icon name="add-circle" (click)="agregarQuitar(producto, 1)"></ion-icon></ion-col>
+    	    	<ion-col>{{producto.nombre}}</ion-col>
+<!--             <ion-col>{{producto.precio | currency:'USD':true:'1.0-2'}}</ion-col>
+ -->    	    	<ion-col>{{producto.precio}} <ion-icon name="close-circle" (click)="quitar(producto)"></ion-icon></ion-col>
+    	    </ion-row>
+        </li> 
+      </ul>
+    </ion-item-group>
+	
+  <ion-item>
+<!--     <h3>Compra: {{total | currency:'USD':true:'1.0-2'}}</h3>
+ -->    <h3>Compra: <b>${{total}}</b></h3>
+    <p>
+      <button [disabled]="(infoCompra.recogerCompra == '0') && (infoCompra.direccion == null)" ion-button color="danger" block (click)="comprar()"> Comprar </button>
+    </p>
+  </ion-item>
+    
+  </ion-list>
+</ion-content>

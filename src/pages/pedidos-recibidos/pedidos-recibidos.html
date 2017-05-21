@@ -1,0 +1,69 @@
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      Pedidos Recibidos 
+      <ion-badge item-right>{{conteoNuevosPedidos}}</ion-badge>
+      <button ion-button item-right (click)="logout($event)">Salir</button>
+    </ion-list-header>
+    <ion-item  *ngFor="let pedido of pedidosRecibidos" >
+      <ion-item  (click)="toggle(pedido)" class="titulo" [ngClass]="{'primary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 1, 'secondary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 2, 'danger': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 3}"> 
+        <h3>{{pedido.persona.nombres}} {{pedido.persona.apellidos}} </h3>
+      </ion-item>
+      <ion-item [hidden]="!isGroupShown(pedido)">
+        <ion-icon name="contact1" item-left large></ion-icon>
+        <h2>{{pedido.persona.nombres}}</h2>
+        <h2><a href="tel:{{pedido.persona.telefono}}">{{pedido.persona.celular}}"</a></h2>
+        <p [hidden]="pedido.compra.recogerCompra == 'S'">{{pedido.compra.direccion}} - {{pedido.compra.desDireccion}}</p>
+        <ion-fab right middle [hidden]="!isGroupShown(pedido)">
+          <button ion-fab [disabled]="!time" color="blue" (click)="pedidoAceptado(pedido.compra.idCompra, pedido.compra.valorDomicilio)"><ion-icon name="checkmark"></ion-icon></button>
+        </ion-fab>
+        <ion-fab left middle [hidden]="!isGroupShown(pedido)">
+          <button ion-fab [disabled]="!cancelado" color="danger" (click)="pedidoCancelado(pedido.compra.idCompra, 'cancelado')"><ion-icon name="close"></ion-icon></button>
+        </ion-fab>
+        <div [hidden]="!(pedido.compra.recogerCompra == 'S')">
+          <b>Este pedido es para recoger en:</b>
+        </div>
+      </ion-item>
+      <ion-item [hidden]="!isGroupShown(pedido)">
+        <ion-range min="15" max="90" step="15" snaps="true" pin="true" [(ngModel)]="time" color="danger">
+          <ion-icon range-left small color="danger" name="clock"></ion-icon>
+          <ion-icon range-right color="danger" name="clock"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <ul>
+        <li  style="list-style:none" [hidden]="!isGroupShown(pedido)" *ngFor="let producto of pedido.listaProducto">
+          {{producto.cantidad}} {{producto.nombreProducto}} {{producto.descripcionCantidad}}
+        </li>
+        <div [hidden]="!isGroupShown(pedido)">
+          <ion-item>
+            <ion-label floating>Cancelado</ion-label>
+            <ion-input type="text" [(ngModel)]="cancelado"></ion-input>
+          </ion-item>
+          <div [hidden]="!(pedido.compra.recogerCompra == 'N')">
+            <div [hidden]="!(pedido.compra.sede.valorDomicilio == '1')"> 
+              <ion-item>
+                <ion-label floating>Domicilio</ion-label>
+                <ion-input type="number" [(ngModel)]="pedido.compra.valorDomicilio"></ion-input>
+              </ion-item>
+              <!-- Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) | currency:'USD':true:'1.0-2'}} -->
+              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) }}
+            </div>
+            <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1')">
+<!--               Domicilio: {{pedido.compra.sede.valorDomicilio | currency:'USD':true:'1.0-2'}}
+ -->              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1)}}
+            </div>
+            <div [hidden]="!(pedido.compra.sede.valorDomicilio == '0')">
+              Domicilio: Gratis
+<!--               Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':true:'1.0-2'}}
+ -->              Total: {{(pedido.compra.valorCompra * 1) }}
+            </div>
+          </div>
+          <div [hidden]="!(pedido.compra.recogerCompra == 'S')">
+<!--             Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':true:'1.0-2'}}
+ -->            Total: {{(pedido.compra.valorCompra * 1)}}
+          </div>
+        </div>
+      </ul>
+    </ion-item>
+  </ion-list>	
+</ion-content>

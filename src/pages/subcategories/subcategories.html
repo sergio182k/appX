@@ -1,0 +1,24 @@
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Categorias
+        </ion-list-header>
+    <ion-item-divider light>{{nameCategory.nombre}}</ion-item-divider>
+    
+    <ion-item *ngFor="let producto of subCategories"> 
+        <ion-thumbnail item-left>
+          <img src="assets/img/productos/{{producto.nombreImagen}}">
+        </ion-thumbnail>
+        <h3>{{producto.nombre}}</h3>
+        <h3>{{producto.descripcion}}</h3>
+        <h3>{{producto.descripcionCantidad}}</h3>
+        <h3>{{producto.precio}}</h3> 
+        <button ion-button color="danger" (click)="agregar(producto)">Agregar</button>
+    </ion-item>
+    </ion-list>
+    <div id="botonConfirma" [hidden]="!verBarra">
+        <button ion-button color="danger"  block (click)="confirmaCompra()">Confirmar Compra</button>
+    </div> 
+    
+</ion-content>
+

@@ -1,0 +1,35 @@
+<ion-content padding>
+  <ion-item>
+    <img src="assets/img/Clicpedidos.png"> 
+  </ion-item>
+  
+  <ion-item >
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Selecciona tu ubicación</ion-label>
+    <ion-select [(ngModel)]="parmBusqueda.idCiudad">
+      <ion-option value="86">Rionegro</ion-option>
+      <ion-option value="63">La Ceja </ion-option>
+      <ion-option value="31">El carmen</ion-option>
+      <ion-option value="106">Santuario</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-searchbar id="barraBusqueda" [(ngModel)]="parmBusqueda.parametroBusqueda" placeholder="Busca tu producto">  
+  </ion-searchbar>
+
+  <p>
+    <button ion-button color="danger" block (click)="buscarAfiliado(parmBusqueda)"> Buscar </button>
+  </p>
+
+  <ion-fab right bottom>
+    <!-- <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button> -->
+    <button ion-fab color="danger"><ion-icon name="more"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="logout($event)"><ion-icon name="log-out"></ion-icon></button>
+      <button ion-fab (click)="pedidosRealizados()"><ion-icon name="ios-cart"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+	
+</ion-content>

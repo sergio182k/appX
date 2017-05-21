@@ -1,0 +1,39 @@
+<ion-header>
+  <!-- <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ClicPedidos</ion-title>
+  </ion-navbar> -->
+</ion-header>
+
+
+<ion-content padding>
+
+ <ion-list inset>
+  
+  <ion-item class="item-borderless">
+    <img src="assets/img/clicLogo.png"> 
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Usuario</ion-label>
+    <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+
+  <div padding>
+    <button ion-button color="danger" block (click)="login($event)">Inicio</button>
+  </div>
+
+  <div padding>
+    <button ion-button block clear (click)="next($event)">Registrate</button>
+  </div>
+
+</ion-list>
+
+</ion-content>

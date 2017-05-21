@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar #navbarx class="bar navBar" hide-back-button>
+    <ion-title>Categorias</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding id="bloqueProd">
+  <ion-list>
+   <!--  <ion-list-header>
+      Categorias 
+    </ion-list-header> -->
+
+    <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="more"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="logOut()"><ion-icon name="log-out"></ion-icon></button>
+      <button ion-fab (click)="pedidosRealizados()"><ion-icon name="ios-cart"></ion-icon></button>
+      <button ion-fab (click)="busqueda()"><ion-icon name="ios-search"></ion-icon></button>
+    </ion-fab-list>
+    </ion-fab>
+
+    <div>
+    <ion-item *ngFor="let category of listCategory" id="lista">
+	    <ion-item (click)="buscarProducto(category)" id="prueba"> 
+	      <h4>{{category.nombre}}</h4>
+        <span item-right><ion-icon name="arrow-down" id="customIcon"></ion-icon></span>
+	    </ion-item>
+      <ion-item [hidden]="!isGroupShown(category)" *ngFor="let producto of productos" id="lista">
+        <ion-thumbnail item-left>
+	        <img src="assets/img/productos/{{producto.nombreImagen}}">
+	      </ion-thumbnail>
+	      <h3>{{producto.nombre}}</h3>
+	      <h3>{{producto.descripcion}}</h3>
+	      <h3>{{producto.descripcionCantidad}}</h3>
+<!--         <h3>{{producto.precio | currency:'USD':true:'1.0-2'}}</h3> 
+ -->	      <h3>{{producto.precio}}</h3> 
+        <div item-right>
+          <div>
+            <select id="selected2" [(ngModel)]="producto.cantidad">
+              <!-- <option selected >Choose here</option> -->
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <button ion-button color="danger" (click)="agregar(producto)"><ion-icon name="cart"></ion-icon></button>
+        </div>
+      </ion-item>
+    </ion-item>
+    </div>
+  </ion-list>	
+  <div id="botonConfirma" [hidden]="!verBarra">
+    <button ion-button color="danger"  block (click)="confirmaCompra()">Confirmar Compra ${{total}}</button>
+  </div> 
+</ion-content>

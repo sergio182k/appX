@@ -1,0 +1,42 @@
+page-lista-afiliados {
+	
+
+}
+
+	#bloque.item-md {
+    	border-bottom: 1px solid #dedede;
+	}
+
+	#prueba{
+		position: relative;
+    	margin-top: -15px;
+    	margin-bottom: -15px;
+	}
+
+	.marca-estado{
+		height: 5em;
+	    left: 0;
+	    max-width: .5em;
+	    min-width: .5em;
+	    position: absolute;
+	    width: .5em;
+	}
+
+	.estado-abierto{
+		background-color: green;
+	}
+
+	.estado-cerrado{
+		background-color: red;
+	}
+
+	.colorClaro{
+		color: "#F0F8FF";
+	}
+
+	#scroll-Horizontal {
+		white-space: nowrap;
+    	height: 7.5em;
+    	position: relative;
+	}
+

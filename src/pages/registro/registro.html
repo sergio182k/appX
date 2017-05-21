@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar class="bar navBar">
+    <ion-title>Registrese</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+	<form [formGroup]="registerForm">
+		<ion-list>
+			
+			<ion-item>
+			    <ion-label floating>Nombre</ion-label>
+			    <ion-input type="text" formControlName="nombre" name="nombre"></ion-input>
+		  	</ion-item>
+		  	<ion-item *ngIf="!nombre.valid && nombre.touched">
+		  		<p>Debe diligenciar el nombre</p>
+		  	</ion-item>
+		  	
+			<ion-item>
+			    <ion-label floating>Apellido</ion-label>
+			    <ion-input type="text" formControlName="apellido" name="apellido"></ion-input>
+		  	</ion-item>
+		  	<ion-item *ngIf="!apellido.valid && apellido.touched">
+		  		<p>Debe diligenciar el apellido</p>
+		  	</ion-item>
+
+		  	<ion-item>
+			    <ion-label floating>Celular</ion-label>
+			    <ion-input type="number" formControlName="telefono" name="telefono"></ion-input>
+		  	</ion-item>
+		  	<ion-item *ngIf="!telefono.valid && telefono.touched">
+		  		<p>El campo debe tener al menos 7 carácteres</p>
+		  	</ion-item>
+
+		  	<ion-item>
+			    <ion-label floating>Email</ion-label>
+			    <ion-input type="text" formControlName="email" name="username"></ion-input>
+		  	</ion-item>
+		  	<ion-item *ngIf="!email.valid && email.touched">
+		  		<p>Debe diligenciar el Email</p>
+		  	</ion-item>
+
+		  	<ion-item>
+			    <ion-label floating>Confirmar Email</ion-label>
+			    <ion-input type="text" formControlName="confEmail" name="username"></ion-input>
+		  	</ion-item>
+		  	<ion-item *ngIf="!confEmail.valid && confEmail.touched">
+		  		<p>Debe confirmar el correo</p>
+		  	</ion-item>
+
+		  	<ion-item>
+			    <ion-label floating>Password</ion-label>
+			    <ion-input type="Password" formControlName="password" name="password"></ion-input>
+		  	</ion-item>
+			<ion-item *ngIf="!password.valid && password.touched">
+		  		<p>Contraseña debe tener al menos 8 carácteres</p>
+		  	</ion-item>
+
+			<ion-item>
+			    <ion-label floating>Password</ion-label>
+			    <ion-input type="Password" formControlName="confPassword" name="password"></ion-input>
+		  	</ion-item>
+			<ion-item *ngIf="!confPassword.valid && confPassword.touched">
+		  		<p>Contraseña debe tener al menos 8 carácteres</p>
+		  	</ion-item>
+
+			<ion-item><a href="https://clicpedidos.co/#/politicas">Terminos y Condiciones</a></ion-item>
+
+		  	<ion-item>
+			  	<ion-label>Acepto Términos y Política de privacidad</ion-label>
+  				<ion-checkbox color="danger" [(ngModel)]="terminos"  [ngModelOptions]="{standalone: true}"></ion-checkbox>
+			</ion-item>
+
+		  	<div padding>
+		  		<div>
+    				<button ion-button color="danger" (click)=registrar() block [disabled]="(!registerForm.valid) || !terminos">Registro</button>
+    			</div>
+  			</div>
+		  	
+		</ion-list>
+
+	</form>
+</ion-content>
