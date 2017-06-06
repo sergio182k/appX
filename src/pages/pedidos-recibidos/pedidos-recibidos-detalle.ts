@@ -16,13 +16,6 @@ export class PedidosRecibidosDetalle implements OnInit, OnDestroy {
               private _viewCtrl: ViewController) {
     this.pedido = _navParams.get('pedido');
     this.conteoNuevosPedidos = _navParams.get('conteoNuevosPedidos');
-    try {
-      this.pedido.compra.valorDomicilio = parseInt(this.pedido.compra.valorDomicilio, 0);
-      this.pedido.compra.sede.valorDomicilio = parseInt(this.pedido.compra.sede.valorDomicilio, 0);
-    } catch(e) {
-      this.pedido.compra.valorDomicilio = this.pedido.compra.valorDomicilio * 1;
-      this.pedido.compra.valorDomicilio = this.pedido.compra.sede.valorDomicilio * 1;
-    }
     _navParams = null;
   }
 

@@ -34,29 +34,28 @@
             <h6 class="datos-cliente-pedido">
               Domicilio: Gratis
             </h6>
-            <h6 class="datos-cliente-pedido"> <!-- TODO como que multiplicado x 1 (pedido.compra.valorCompra * 1) -->
-              Total: {{pedido.compra.valorCompra * 1 | currency:'USD':'true':'1.0-0'}}
+            <h6 class="datos-cliente-pedido">
+              Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':'true':'1.0-0'}}
             </h6>
           </div>
           <div [hidden]="!(pedido.compra.sede.valorDomicilio == '1')">
-            <h6 class="datos-cliente-pedido"> <!-- TODO como que multiplicado x uno  (pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) -->
-              Total: {{(pedido.compra.valorCompra + pedido.compra.valorDomicilio) * 1 | currency:'USD':'true':'1.0-0'}}
+            <h6 class="datos-cliente-pedido">
+              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) | currency:'USD':'true':'1.0-0'}}
             </h6>
           </div>
-          <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1')"> <!-- TODO ESTO QUE -->
-            <h6 class="datos-cliente-pedido"> <!-- TODO como que multiplicado x uno (pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1) -->
-              Total: {{(pedido.compra.valorCompra + pedido.compra.sede.valorDomicilio) * 1 | currency:'USD':'true':'1.0-0'}}
+          <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1')">
+            <h6 class="datos-cliente-pedido">
+              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1) | currency:'USD':'true':'1.0-0'}}
             </h6>
           </div>
         </div>
-        <div [hidden]="!(pedido.compra.recogerCompra == 'S')"> <!-- TODO como multiplicado x 1 (pedido.compra.valorCompra * 1)  -->
+        <div [hidden]="!(pedido.compra.recogerCompra == 'S')">
           <h6 class="datos-cliente-pedido">
-            Total: {{pedido.compra.valorCompra * 1 | currency:'USD':'true':'1.0-0'}}
+            Total: {{(pedido.compra.valorCompra * 1) | currency:'USD':'true':'1.0-0'}}
           </h6>
         </div>
         <!-- end section  -->
       </ion-col>
-
     </ion-row>
     <!-- end section -->
     <!-- section time -->
