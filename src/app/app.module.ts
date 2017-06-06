@@ -10,6 +10,7 @@ import { Subcategories } from '../pages/subcategories/subcategories';
 import { Compra } from '../pages/compra/compra';
 import { PedidosRealizados } from '../pages/pedidos-realizados/pedidos-realizados';
 import { PedidosRecibidos } from '../pages/pedidos-recibidos/pedidos-recibidos';
+import { PedidosRecibidosDetalle } from '../pages/pedidos-recibidos/pedidos-recibidos-detalle';
 import { AuthService } from '../providers/auth-service';
 import { RegisterService } from '../providers/register-service';
 import { AfiliadoService } from '../providers/afiliado-service';
@@ -35,6 +36,7 @@ import { Maps} from '../maps/maps';
     Compra,
     PedidosRealizados,
     PedidosRecibidos,
+    PedidosRecibidosDetalle,
     Maps
   ],
   imports: [
@@ -54,9 +56,10 @@ import { Maps} from '../maps/maps';
     Compra,
     PedidosRealizados,
     PedidosRecibidos,
+    PedidosRecibidosDetalle,
     Maps
   ],
-  providers: [AuthService, RegisterService, AfiliadoService, ProductoService, CompraService, PedidosAService,
-    PedidosRService]
+  providers: [AfiliadoService, AuthService, CompraService, PedidosAService, PedidosRService, ProductoService,
+    RegisterService]
 })
 export class AppModule {}

@@ -33,4 +33,43 @@ export class ModalService{
     alert.present();
   }
 
+  /**
+   *
+   * @param metodo
+   * @param placeholderInput
+   * @param title
+   * @param subTitle
+   * @param @optional valoresExtra
+   */
+  public presentPrompt(metodo, placeholderInput, title, subTitle, valoresExtra?): void {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subTitle,
+      inputs: [{
+        name: 'texto',
+        placeholder: placeholderInput,
+        type: 'text'
+      }],
+      buttons: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Cancelar',
+          handler: data => {
+            if(valoresExtra) {
+              metodo(data['texto'], valoresExtra);
+            } else {
+              metodo(data['texto']);
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }

@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavController, Platform} from 'ionic-angular';
+import {ModalController, NavController, Platform} from 'ionic-angular';
 import {Vibration} from 'ionic-native';
 import {ModalService} from '../../servicios/modal.service';
 import {PedidosRService} from '../../providers/pedidosR-service';
+import {PedidosRecibidosDetalle} from './pedidos-recibidos-detalle';
 import {AuthService} from '../../providers/auth-service';
 import {InicioPage} from '../inicio/inicio';
 import {LocalNotifications} from 'ionic-native';
@@ -17,16 +18,15 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
 
   private backgroundState: boolean;
   pedidosRecibidos: any;
+  private pedidoSeleccionado: number = -1;
   conteoNuevosPedidos: number;
-  shownGroup: any;
   time: number = 0;
   cargaInicial: boolean;
-  intervalHandle = null;
   noMostrarUltimoMenError = true;
   mostrarVentanaNuevosPedidos = true;
 
-  constructor(private navCtrl: NavController, public _pedidoServ: PedidosRService, public _modal: ModalService,
-              private platform: Platform, private _service: AuthService) {
+  constructor(private _authService: AuthService, private _modalCtrl: ModalController, private _modal: ModalService,
+              private _pedidoServ: PedidosRService, private _platform: Platform, private _navCtrl: NavController) {
     this.buscarPedidos();
     this.conteoNuevosPedidos = 0;
     this.cargaInicial = true;
@@ -62,21 +62,7 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
     BackgroundMode.disable();
   }
 
-  buscarPedidos() {
-    console.log('llego a buscarpedidos');
-    this._pedidoServ.pedidosA().subscribe(
-      data => this._onBusquedaSucces(data),
-      err => {
-        console.log(err);
-        if (this.noMostrarUltimoMenError) {
-          this._modal.showAlert('Error', 'No hay pedidos disponibles');
-        }
-      },
-      () => setTimeout(this.buscarPedidos.bind(this), 10000)
-    );
-  }
-
-  _onBusquedaSucces(data) {
+  private _onBusquedaSucces(data) {
     if (this.cargaInicial) {
       this.pedidosRecibidos = data;
       this.cargaInicial = false;
@@ -99,6 +85,14 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
     }
   }
 
+  private _onLogoutSucces() {
+    this._modal.showAlert('Exito', 'LogOut');
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('tipoUsuario');
+    this._navCtrl.push(InicioPage);
+    this.noMostrarUltimoMenError = false;
+  }
+
   private _showNotification(text: string): void {
     LocalNotifications.schedule({
       id: 1,
@@ -109,67 +103,26 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
     });
   }
 
-  toggle(pedido) {
-    this.shownGroup = this.isGroupShown(pedido) ? null : pedido;
-  }
-
-  isGroupShown(pedido) {
-    return this.shownGroup === pedido;
-  }
-
-  pedidoAceptado(idCompra, valorDomicilio) {
-    this.mostrarVentanaNuevosPedidos = true;
-    this._pedidoServ.pedidosAceptados(idCompra, this.time, valorDomicilio).subscribe(
-      data => this._onBusquedaSuccesAceptados(data, idCompra),
-      err => {
-        this._modal.showAlert('Error', 'No Acepto');
-      },
-      () => {
-      }
-    );
-  }
-
-  _onBusquedaSuccesAceptados(data, idCompra) {
-    if (this.conteoNuevosPedidos != 0) {
-      this.conteoNuevosPedidos--;
-    }
-    for (var i = 0; i <= this.pedidosRecibidos.length - 1; i++) {
-      if (this.pedidosRecibidos[i].compra.idCompra == idCompra) {
-        this.pedidosRecibidos[i].procesosCompraActual.tipoProceso.idTipoProceso = 2;
-      }
-    }
-  }
-
-  pedidoCancelado(idCompra, cancelado) {
-    this.mostrarVentanaNuevosPedidos = true;
-    this._pedidoServ.pedidosCancelados(idCompra, cancelado).subscribe(
-      data => this._onBusquedaSuccesCancelados(data, idCompra),
+  public buscarPedidos() {
+    this._pedidoServ.pedidosA().subscribe(
+      data => this._onBusquedaSucces(data),
       err => {
         console.log(err);
-        this._modal.showAlert('Error', 'No Cancelo');
+        if (this.noMostrarUltimoMenError) {
+          this._modal.showAlert('Error', 'No hay pedidos disponibles');
+        }
       },
-      () => console.log('End-PedidoAceptado')
+      () => setTimeout(this.buscarPedidos.bind(this), 10000)
     );
   }
 
-  _onBusquedaSuccesCancelados(data, idCompra) {
-    if (this.conteoNuevosPedidos != 0) {
-      this.conteoNuevosPedidos--;
-    }
-    for (var i = 0; i <= this.pedidosRecibidos.length - 1; i++) {
-      if (this.pedidosRecibidos[i].compra.idCompra == idCompra) {
-        this.pedidosRecibidos[i].procesosCompraActual.tipoProceso.idTipoProceso = 3;
-      }
-    }
-  }
-
-  logout(event) {
+  public logout(event) {
     if (window.localStorage.getItem('token') === "undefined" || window.localStorage.getItem('token') === null) {
       console.log('error');
     } else {
       let userSend = window.localStorage.getItem('token');
       console.log(userSend);
-      this._service.logout(userSend).subscribe(
+      this._authService.logout(userSend).subscribe(
         data => this._onLogoutSucces(),
         err => {
           console.log(err);
@@ -179,11 +132,25 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
     }
   }
 
-  _onLogoutSucces() {
-    this._modal.showAlert('Exito', 'LogOut');
-    window.localStorage.removeItem('username');
-    window.localStorage.removeItem('tipoUsuario');
-    this.navCtrl.push(InicioPage);
-    this.noMostrarUltimoMenError = false;
+  public open(pedido: any, index: number): void {
+    // this.shownGroup = this.isGroupShown(pedido) ? null : pedido;
+    this.pedidoSeleccionado = index;
+    const PEDIDODETALLE = this._modalCtrl.create(PedidosRecibidosDetalle, {
+      conteoNuevosPedidos: this.conteoNuevosPedidos,
+      pedido: pedido
+    });
+    PEDIDODETALLE.onDidDismiss(data => {
+      console.log('datadatadatadatadatadatadata');
+      try {
+        if(data.pedido) {
+          this.conteoNuevosPedidos = data.conteoNuevosPedidos;
+          this.pedidosRecibidos[this.pedidoSeleccionado] = data.pedido;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+      console.log(data);
+    });
+    PEDIDODETALLE.present();
   }
 }

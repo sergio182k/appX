@@ -10,13 +10,13 @@
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
         },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
         },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
-        },
-        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
         },
         "cordova-plugin-statusbar": {
@@ -25,16 +25,13 @@
         "cordova-plugin-vibration": {
             "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
-        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
         },
-        "cordova-plugin-background-mode": {
+        "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
         },
-        "de.appplant.cordova.plugin.local-notification": {
+        "cordova-plugin-background-mode": {
             "PACKAGE_NAME": "com.ionicframework.clicpedidos107401"
         }
     },

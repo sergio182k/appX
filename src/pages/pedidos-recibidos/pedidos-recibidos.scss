@@ -1,18 +1,57 @@
+.datos-cliente-pedido {
+  margin: 0;
+}
+
+.pedidos-recibido-cliente-resumen {
+  ion-range {
+    background-color: lightgray;
+  }
+}
+
+.pedidos-recibido-cliente-resumen, .pedido-recibido-rango-tiempo {
+  background-color: lightgray;
+}
+
+.pedido-recibido-lista {
+  margin-top: 0.75em;
+}
+
+.pedido-recibido-fab-buttons {
+  height: 2em;
+  margin-top: -1.5em;
+}
+
+.boton-aceptar-pedido-recibido {
+  right: 0px !important;
+}
+
+.boton-cancelar-pedido-recibido {
+  left: -5px !important;
+}
+
+.cliente-contacto {
+  margin-left: 2em;
+  margin-right: 2em;
+  max-width: 75%;
+  position: relative;
+  width: 75%;
+}
+
 .titulo{
-	//background-color: #428bca; 
+	//background-color: #428bca;
 	border-radius: 5px;
 	color: white;
 }
 
 .primary{
-	background-color: #387ef5; 
+	background-color: #387ef5;
 }
 
 .secondary{
-	background-color: #32db64; 
+	background-color: #32db64;
 }
 
 .danger{
-	background-color: #f53d3d; 
+	background-color: #f53d3d;
 }
 

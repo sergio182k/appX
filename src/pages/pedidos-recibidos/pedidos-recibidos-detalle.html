@@ -1,0 +1,105 @@
+<ion-content>
+  <!-- section header -->
+  <ion-grid class="pedidos-recibido-cliente-resumen">
+    <ion-row>
+      <!-- section contact -->
+      <ion-col width-66 class="datos-cliente-pedido">
+        Para:
+        <h6 class="datos-cliente-pedido">
+          {{pedido.persona.nombres}} - <a href="tel:{{pedido.persona.telefono}}">{{pedido.persona.celular}}</a>
+        </h6>
+        <h6 class="datos-cliente-pedido" [hidden]="pedido.compra.recogerCompra == 'S'">
+          {{pedido.compra.direccion}} - {{pedido.compra.desDireccion}}
+        </h6>
+        <h6 class="datos-cliente-pedido" [hidden]="pedido.compra.recogerCompra != 'S'">
+          Este pedido es para recoger en sitio
+        </h6>
+      </ion-col>
+      <!-- end section  -->
+      <ion-col>
+        <button ion-button item-right (click)="close();">Cerrar</button>
+      </ion-col>
+    </ion-row>
+    <!-- section input precio domicilio -->
+    <ion-row>
+      <ion-col width-66>
+        <ion-input
+          [hidden]="pedido.compra.sede.valorDomicilio != '1'" class=""
+          placeholder="Toque acá para valor domicilio" type="number" [(ngModel)]="pedido.compra.valorDomicilio"></ion-input>
+      </ion-col>
+      <ion-col>
+        <!-- section total -->
+        <div [hidden]="!(pedido.compra.recogerCompra == 'N')">
+          <div [hidden]="!(pedido.compra.sede.valorDomicilio == '0')">
+            <h6 class="datos-cliente-pedido">
+              Domicilio: Gratis
+            </h6>
+            <h6 class="datos-cliente-pedido"> <!-- TODO como que multiplicado x 1 (pedido.compra.valorCompra * 1) -->
+              Total: {{pedido.compra.valorCompra * 1 | currency:'USD':'true':'1.0-0'}}
+            </h6>
+          </div>
+          <div [hidden]="!(pedido.compra.sede.valorDomicilio == '1')">
+            <h6 class="datos-cliente-pedido"> <!-- TODO como que multiplicado x uno  (pedido.compra.valorCompra * 1) + (pedido.compra.valorDomicilio * 1) -->
+              Total: {{(pedido.compra.valorCompra + pedido.compra.valorDomicilio) * 1 | currency:'USD':'true':'1.0-0'}}
+            </h6>
+          </div>
+          <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1')"> <!-- TODO ESTO QUE -->
+            <h6 class="datos-cliente-pedido"> <!-- TODO como que multiplicado x uno (pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1) -->
+              Total: {{(pedido.compra.valorCompra + pedido.compra.sede.valorDomicilio) * 1 | currency:'USD':'true':'1.0-0'}}
+            </h6>
+          </div>
+        </div>
+        <div [hidden]="!(pedido.compra.recogerCompra == 'S')"> <!-- TODO como multiplicado x 1 (pedido.compra.valorCompra * 1)  -->
+          <h6 class="datos-cliente-pedido">
+            Total: {{pedido.compra.valorCompra * 1 | currency:'USD':'true':'1.0-0'}}
+          </h6>
+        </div>
+        <!-- end section  -->
+      </ion-col>
+
+    </ion-row>
+    <!-- end section -->
+    <!-- section time -->
+    <!-- Dont used ion-row for minimize the height of this control. The ion-item is enough -->
+    <ion-item class="pedido-recibido-rango-tiempo">
+      <ion-range min="15" max="90" step="15" small snaps="true" [(ngModel)]="time" color="danger" item-left>
+      <!--<ion-range min="15" max="90" step="15" small snaps="true" pin="true" [(ngModel)]="time" color="danger">-->
+        <ion-icon range-left small color="danger" name="clock"></ion-icon>
+        <ion-icon range-right color="danger" name="clock"></ion-icon>
+      </ion-range>
+      <ion-badge color="danger" item-right>{{time}}m</ion-badge>
+    </ion-item>
+    <!-- end section -->
+    <!-- section fab-buttons -->
+    <ion-row class="pedido-recibido-fab-buttons">
+      <ion-fab left edge class="">
+        <button ion-fab mini color="danger"
+                (click)="cancelar(pedido.compra.idCompra)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-fab>
+      <ion-fab center edge class="">
+        <button ion-fab [disabled]="!time" color="blue"
+                (click)="pedidoAceptado(pedido.compra.idCompra, pedido.compra.valorDomicilio)">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-fab>
+      <ion-fab right edge class="">
+        <button ion-fab mini color="secondary"
+                (click)="mostrarMapa(pedido.compra.desDireccion)">
+          <ion-icon name="navigate"></ion-icon>
+        </button>
+      </ion-fab>
+    </ion-row>
+    <!-- end section-->
+  </ion-grid>
+  <!-- end section-->
+  <!-- section list pedidos -->
+  <ion-list class="pedido-recibido-lista">
+    <ion-item style="list-style:none" *ngFor="let producto of pedido.listaProducto">
+      {{producto.cantidad}} {{producto.nombreProducto}} {{producto.descripcionCantidad}}
+    </ion-item>
+  </ion-list>
+  <!-- end section-->
+</ion-content>
+
