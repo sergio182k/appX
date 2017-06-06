@@ -28,7 +28,7 @@
     "@ionic/storage": "1.0.3",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.14",
     "@types/google-maps": "^3.2.0",
-    "cordova-android": "^6.1.2",
+    "cordova-android": "^6.2.3",
     "cordova-plugin-app-event": "^1.2.0",
     "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-compat": "^1.1.0",
