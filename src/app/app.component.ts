@@ -21,7 +21,6 @@ export class MyApp {
     public menu: MenuController
   ) {
     this.initializeApp();
-
   }
 
   initializeApp() {
@@ -40,6 +39,17 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+      /**
+       * Unable back button action from all pages and components on Android
+       */
+      this.platform.registerBackButtonAction(this._onBackButton.bind(this), 1);
     });
+  }
+
+  /**
+   * Unable back button action from all pages and components on Android
+   */
+  private _onBackButton(): void {
+    console.log('nothing');
   }
 }

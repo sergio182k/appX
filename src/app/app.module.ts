@@ -40,7 +40,7 @@ import { Maps} from '../maps/maps';
     Maps
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
