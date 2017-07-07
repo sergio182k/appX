@@ -1,15 +1,30 @@
+$background-color-cliente: #f7f7f7;
+
 .datos-cliente-pedido {
   margin: 0;
 }
 
 .pedidos-recibido-cliente-resumen {
   ion-range {
-    background-color: lightgray;
+    background-color: $background-color-cliente;
+  }
+
+  .input-valor-domicilio {
+
+    ion-icon {
+      font-size: 2em !important;
+    }
+
+    ion-input {
+      display: inline-block !important;
+      font-size: 1.2em !important;
+      width: 80% !important;
+    }
   }
 }
 
 .pedidos-recibido-cliente-resumen, .pedido-recibido-rango-tiempo {
-  background-color: lightgray;
+  background-color: $background-color-cliente;
 }
 
 .pedido-recibido-lista {

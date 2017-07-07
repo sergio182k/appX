@@ -22,10 +22,11 @@
     </ion-row>
     <!-- section input precio domicilio -->
     <ion-row>
-      <ion-col width-66>
+      <ion-col width-66 class="input-valor-domicilio">
+        <ion-icon name="bicycle"></ion-icon>
         <ion-input
-          [hidden]="pedido.compra.sede.valorDomicilio != '1'" class=""
-          placeholder="Toque acá para valor domicilio" type="number" [(ngModel)]="pedido.compra.valorDomicilio"></ion-input>
+          [hidden]="pedido.compra.sede.valorDomicilio != '1'"
+          placeholder="$ domicilio" type="number" [(ngModel)]="pedido.compra.valorDomicilio"></ion-input>
       </ion-col>
       <ion-col>
         <!-- section total -->
@@ -45,7 +46,7 @@
           </div>
           <div [hidden]="!(pedido.compra.sede.valorDomicilio > '1')">
             <h6 class="datos-cliente-pedido">
-              Total: {{(pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1) | currency:'USD':'true':'1.0-0'}}
+              Total: {{((pedido.compra.valorCompra * 1) + (pedido.compra.sede.valorDomicilio * 1)) | currency:'USD':'true':'1.0-0'}}
             </h6>
           </div>
         </div>
@@ -56,6 +57,7 @@
         </div>
         <!-- end section  -->
       </ion-col>
+
     </ion-row>
     <!-- end section -->
     <!-- section time -->
@@ -85,7 +87,7 @@
       </ion-fab>
       <ion-fab right edge class="">
         <button ion-fab mini color="secondary"
-                (click)="mostrarMapa(pedido.compra.desDireccion)">
+                (click)="mostrarMapa(pedido.compra.direccion)">
           <ion-icon name="navigate"></ion-icon>
         </button>
       </ion-fab>

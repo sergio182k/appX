@@ -25,9 +25,9 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
   noMostrarUltimoMenError = true;
   mostrarVentanaNuevosPedidos = true;
 
-  constructor(private _authService: AuthService, private _modalCtrl: ModalController, private _modal: ModalService,
-              private _pedidoServ: PedidosRService, private _platform: Platform, private _navCtrl: NavController) {
-    this.buscarPedidos();
+  constructor(private _authService: AuthService, private _modalCtrl: ModalController,
+    private _modal: ModalService, private _pedidoServ: PedidosRService, private _navCtrl: NavController, private _platform: Platform) {
+    this.buscarPedidos(false);
     this.conteoNuevosPedidos = 0;
     this.cargaInicial = true;
     this.backgroundState = false;
@@ -44,7 +44,12 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
     this._deshabilitarBackgroundMode();
     document.addEventListener('pause', this._cambiarEstado.bind(this), false);
     document.addEventListener('resume', this._cambiarEstado.bind(this), false);
+    // this._platform.registerBackButtonAction(this._onBackButton.bind(this), 1);
   }
+
+  // private _onBackButton(): void {
+  //   console.log('nothing');
+  // }
 
   private _cambiarEstado(): void {
     const EXECUTE = () => {
@@ -103,7 +108,10 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
     });
   }
 
-  public buscarPedidos() {
+  /**
+   * @param oneTime : boolean => true if require execute just one time, false for continuos execution
+   */
+  public buscarPedidos(oneTime?: boolean) {
     this._pedidoServ.pedidosA().subscribe(
       data => this._onBusquedaSucces(data),
       err => {
@@ -112,7 +120,9 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
           this._modal.showAlert('Error', 'No hay pedidos disponibles');
         }
       },
-      () => setTimeout(this.buscarPedidos.bind(this), 10000)
+      () => {
+        if (!oneTime) { setTimeout(this.buscarPedidos.bind(this), 10000) }
+      }
     );
   }
 
@@ -133,14 +143,13 @@ export class PedidosRecibidos implements OnInit, OnDestroy {
   }
 
   public open(pedido: any, index: number): void {
-    // this.shownGroup = this.isGroupShown(pedido) ? null : pedido;
     this.pedidoSeleccionado = index;
     const PEDIDODETALLE = this._modalCtrl.create(PedidosRecibidosDetalle, {
       conteoNuevosPedidos: this.conteoNuevosPedidos,
       pedido: pedido
     });
     PEDIDODETALLE.onDidDismiss(data => {
-      console.log('datadatadatadatadatadatadata');
+      this.buscarPedidos(true);
       try {
         if(data.pedido) {
           this.conteoNuevosPedidos = data.conteoNuevosPedidos;

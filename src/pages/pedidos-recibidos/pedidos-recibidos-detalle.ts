@@ -1,7 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavParams, ViewController} from 'ionic-angular';
+import {ModalController, NavParams, ViewController} from 'ionic-angular';
 import {ModalService} from '../../servicios/modal.service';
 import {PedidosRService} from '../../providers/pedidosR-service';
+import {Maps} from '../../maps/maps';
+
 
 @Component({
   templateUrl: 'pedidos-recibidos-detalle.html',
@@ -12,16 +14,20 @@ export class PedidosRecibidosDetalle implements OnInit, OnDestroy {
   public pedido: any;
   public time: number = 0;
 
-  constructor(private _modal: ModalService, private _navParams: NavParams, private _pedidoServ: PedidosRService,
-              private _viewCtrl: ViewController) {
+  constructor(private _modalCtrl: ModalController, private _modal: ModalService, private _navParams: NavParams,
+              private _pedidoServ: PedidosRService, private _viewCtrl: ViewController) {
     this.pedido = _navParams.get('pedido');
     this.conteoNuevosPedidos = _navParams.get('conteoNuevosPedidos');
+    console.log(JSON.stringify(this.pedido.compra));
+    debugger;
     _navParams = null;
   }
 
   ngOnDestroy(): void {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pedido.compra.valorDomicilio = this.pedido.compra.valorDomicilio === 0 ? null : this.pedido.compra.valorDomicilio;
+  }
 
   private _borrarCantidadPedidos(cantidad: number): void {
     this.conteoNuevosPedidos = this.conteoNuevosPedidos > 0 ? this.conteoNuevosPedidos - cantidad : this.conteoNuevosPedidos;
@@ -31,6 +37,7 @@ export class PedidosRecibidosDetalle implements OnInit, OnDestroy {
     if (cancel) {
       this._viewCtrl.dismiss({});
     } else {
+      this.pedido.procesosCompraActual.tiempoEntrega = this.time;
       this._viewCtrl.dismiss({
         conteoNuevosPedidos: this.conteoNuevosPedidos,
         pedido: this.pedido
@@ -84,6 +91,15 @@ export class PedidosRecibidosDetalle implements OnInit, OnDestroy {
 
   public mostrarMapa(direccion: string): void {
     console.log(direccion);
+    let mapsModal = this._modalCtrl.create(Maps, {
+      address: direccion,
+      // destLat: direccion.latitud,
+      // destLong: direccion.longitud,
+      onlyDest: true
+    });
+    mapsModal.present();
+    // this.onlyDest = navParams.get('onlyDest');
+    // this.isAfiliado = navParams.get('isAfiliado');
   }
 
   public pedidoAceptado(idCompra, valorDomicilio): void {
