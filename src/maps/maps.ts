@@ -8,6 +8,7 @@ import { Geolocation } from 'ionic-native';
 export class Maps {
 
 	private DIRECTIONSDISPLAYSUPRESSMARKERS: boolean = true;
+	private DEFAULT_CITY = 'Rionegro, Antioquia, Colombia';
   private ICONSTEPSDEST: string = 'assets/icon/cart.png';
   private ICONSTEPSSTEP: string = 'assets/icon/circle.png';
   private ICONSTEPSSTART: string = 'assets/icon/walking.png';
@@ -95,15 +96,17 @@ export class Maps {
   private ZOOMINITIAL: number = 19;
   private WATCHACCURACY: boolean = false;
 
+  private address: string;
   private destLat: number;
 	private destLong: number;
   private isAfiliado: boolean = false;
+  private geocoder: any;
 	private startLat: number;
 	private startLong: number;
   private map: any;
-  private marker:any;
+  private marker: any;
   private onlyDest: boolean = false;
-  
+
   private directionsDisplay: any;
   private directionsService: any;
   private stepDisplay: any;
@@ -112,27 +115,35 @@ export class Maps {
 	constructor(public viewCtrl: ViewController,  private navParams: NavParams) {
 		this.destLat = parseFloat(navParams.get('destLat'));
 		this.destLong = parseFloat(navParams.get('destLong'));
+		this.address = navParams.get('address');
     this.onlyDest = navParams.get('onlyDest');
     this.isAfiliado = navParams.get('isAfiliado');
-    
+
     this.markerArray = [];
 	}
-  
+
   ionViewDidEnter(){
     // Instantiate a directions service.
     this.directionsService = new google.maps.DirectionsService();
-	  this.createMap();
+    this.geocoder = new google.maps.Geocoder();
+    if(!this.address) {
+      this.createMap();
+    }
     this.createRenderedDirections();
     this.createInfoWindow();
-    if(this.onlyDest)
-      this.addDestMarker();
-    else
-      this.getCurrentPosition();
+    if(this.address) {
+      this.parseAddress();
+    } else {
+      if(this.onlyDest)
+        this.addDestMarker();
+      else
+        this.getCurrentPosition();
+    }
   }
 
   addDestMarker(){
     let marker = new google.maps.Marker({
-      icon: this.ICONSTEPSDEST,
+      // icon: this.ICONSTEPSDEST,
       position: {
         lat: this.destLong,
         lng: this.destLat
@@ -248,7 +259,7 @@ export class Maps {
         */
       this.markerArray[i] = marker;
       //this.attachInstructionText(marker, myRoute.steps[i].instructions);
-      
+
     }
   }
 
@@ -276,6 +287,27 @@ export class Maps {
     });
   }
 
+  private onParseAdress(results, status): void {
+    if (status === 'OK') {
+      console.log('*****'+ JSON.stringify(results[0].geometry.location));
+      this.destLat = results[0].geometry.location.lng();
+      this.destLong = results[0].geometry.location.lat();
+      this.createMap();
+      this.addDestMarker();
+    } else {
+      console.log('Geocode was not successful for the following reason: ' + status);
+    }
+  }
+
+  private parseAddress(): void {
+    this.address += ', ' + this.DEFAULT_CITY;
+    // this.geocoder.geocode({'address': this.address}, (results, status) =>  {
+    this.geocoder.geocode({'address': this.address}, this.onParseAdress.bind(this));
+    // }).catch((error) => {
+    //   console.log('Error getting location', error);
+    // });
+  }
+
   updateCurrentPosition(lat, lng){
     this.startLat = lat;
     this.startLong = lng;
@@ -284,4 +316,4 @@ export class Maps {
 
 }
 
-  
+
