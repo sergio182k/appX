@@ -5,7 +5,7 @@
       <ion-badge item-right>{{conteoNuevosPedidos}}</ion-badge>
       <button ion-button item-right (click)="logout($event)">Salir</button>
     </ion-list-header>
-    <ion-item *ngFor="let pedido of pedidosRecibidos; let index of index;">
+    <ion-item class="item-pedidos-recibidos" *ngFor="let pedido of pedidosRecibidos; let index of index;">
       <ion-item (click)="open(pedido, index)" class="titulo"
             [ngClass]="{'primary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 1,
             'secondary': pedido.procesosCompraActual.tipoProceso.idTipoProceso == 2,

@@ -25,10 +25,58 @@ $background-color-cliente: #f7f7f7;
 
 .pedidos-recibido-cliente-resumen, .pedido-recibido-rango-tiempo {
   background-color: $background-color-cliente;
+  padding-left: 4px;
+
+  .range-min {
+    margin-right: 1px;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 90%;
+  }
+
+  .range-min ~ .item-inner {
+    padding-right: 0 !important;
+
+    .input-wrapper {
+      max-width: 8px;
+    }
+  }
+
+  .time-min {
+    margin-left: -4px;
+    padding: 3px 1px !important;
+    width: 2em;
+  }
 }
 
+/**
+ * Lista pedidos recibidos
+ */
+.item-pedidos-recibidos {
+  list-style: none;
+  min-height: 3rem;
+
+  ion-label {
+    margin-bottom: 0;
+    margin-top: 1rem;
+  }
+}
+
+/**
+ * Lista pedidos recibidos detalle
+ */
 .pedido-recibido-lista {
   margin-top: 0.75em;
+
+  .item-detalle-pedido {
+    list-style: none;
+    min-height: 3rem;
+
+    ion-label {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
 }
 
 .pedido-recibido-fab-buttons {

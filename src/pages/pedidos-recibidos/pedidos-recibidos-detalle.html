@@ -63,12 +63,12 @@
     <!-- section time -->
     <!-- Dont used ion-row for minimize the height of this control. The ion-item is enough -->
     <ion-item class="pedido-recibido-rango-tiempo">
-      <ion-range min="15" max="90" step="15" small snaps="true" [(ngModel)]="time" color="danger" item-left>
+      <ion-range class="range-min" min="15" max="90" step="15" small snaps="true" [(ngModel)]="time" color="danger" item-left>
       <!--<ion-range min="15" max="90" step="15" small snaps="true" pin="true" [(ngModel)]="time" color="danger">-->
         <ion-icon range-left small color="danger" name="clock"></ion-icon>
         <ion-icon range-right color="danger" name="clock"></ion-icon>
       </ion-range>
-      <ion-badge color="danger" item-right>{{time}}m</ion-badge>
+      <ion-badge class="time-min" color="danger" item-right>{{time}}m</ion-badge>
     </ion-item>
     <!-- end section -->
     <!-- section fab-buttons -->
@@ -97,7 +97,7 @@
   <!-- end section-->
   <!-- section list pedidos -->
   <ion-list class="pedido-recibido-lista">
-    <ion-item style="list-style:none" *ngFor="let producto of pedido.listaProducto">
+    <ion-item class="item-detalle-pedido" *ngFor="let producto of pedido.listaProducto">
       {{producto.cantidad}} {{producto.nombreProducto}} {{producto.descripcionCantidad}}
     </ion-item>
   </ion-list>

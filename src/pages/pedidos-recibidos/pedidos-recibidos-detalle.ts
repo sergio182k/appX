@@ -19,7 +19,6 @@ export class PedidosRecibidosDetalle implements OnInit, OnDestroy {
     this.pedido = _navParams.get('pedido');
     this.conteoNuevosPedidos = _navParams.get('conteoNuevosPedidos');
     console.log(JSON.stringify(this.pedido.compra));
-    debugger;
     _navParams = null;
   }
 
@@ -91,11 +90,19 @@ export class PedidosRecibidosDetalle implements OnInit, OnDestroy {
 
   public mostrarMapa(direccion: string): void {
     console.log(direccion);
+    // TODO mock fine address
+    direccion = 'Iglesia de San Francisco';
+
+    // startLat: 211,
+    // destLat: this._afiliado.retornoLatLong().sede.latitud,
+    // startLong: 411,
+    // destLong: this._afiliado.retornoLatLong().sede.longitud,
+
     let mapsModal = this._modalCtrl.create(Maps, {
-      address: direccion,
+      address: direccion
       // destLat: direccion.latitud,
       // destLong: direccion.longitud,
-      onlyDest: true
+      // onlyDest: false
     });
     mapsModal.present();
     // this.onlyDest = navParams.get('onlyDest');
